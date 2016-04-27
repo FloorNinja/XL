@@ -1,3 +1,2 @@
 # XL
-LTH EDAF25 - XL Project
-Kalkylblad i Java!
+LTH EDAF25 - XL Project - Kalkylblad i Java!
