@@ -8,9 +8,8 @@ import java.util.Observer;
 
 import javax.swing.JTextField;
 
-import model.Sheet;
 import util.XLException;
-
+import model.Sheet;
 
 public class Editor extends JTextField implements Observer, ActionListener {
 	private CurrentSlot currentSlot;

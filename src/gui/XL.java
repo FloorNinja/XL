@@ -4,14 +4,10 @@ import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
 import gui.menu.XLMenuBar;
-import model.Sheet;
-import model.Slot;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
-
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -19,6 +15,8 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.Sheet;
+import model.Slot;
 
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
@@ -33,6 +31,7 @@ public class XL extends JFrame implements Printable {
 
     public XL(XLList xlList, XLCounter counter) {
         super("Untitled-" + counter);
+        
         this.xlList = xlList;
         this.counter = counter;
         xlList.add(this);
@@ -67,7 +66,9 @@ public class XL extends JFrame implements Printable {
     public void rename(String title) {
         setTitle(title);
         xlList.setChanged();
+        xlList.notifyObservers();
     }
+
     
     public void setData(HashMap<String, Slot> map) {
 		sheet.load(map);
@@ -80,4 +81,6 @@ public class XL extends JFrame implements Printable {
     public static void main(String[] args) {
         new XL(new XLList(), new XLCounter());
     }
+
+    
 }

@@ -5,8 +5,8 @@ import java.util.Observable;
 
 
 public class CurrentSlot extends Observable {
-	SlotLabel currentSlot;
-	
+	private SlotLabel currentSlot;
+
 	/**
 	 * Sets the currently selected slot, and notifies the observing classes.
 	 * @param currentSlot
@@ -15,8 +15,9 @@ public class CurrentSlot extends Observable {
 		this.currentSlot = currentSlot;
 		setChanged();
 		notifyObservers();
+		addObserver(currentSlot);
 	}
-	
+
 	/**
 	 * Returns the address of the currently selected slot.
 	 * @return String address
@@ -24,7 +25,7 @@ public class CurrentSlot extends Observable {
 	public String getAddress() {
 		return currentSlot.getAddress();
 	}
-	
+
 	/**
 	 * Set the background to white again.
 	 */

@@ -9,10 +9,16 @@ import model.Sheet;
 
 public class SlotLabels extends GridPanel {
     private List<SlotLabel> labelList;
+    private CurrentSlot currentSlot;
+    private Sheet sheet;
 
     public SlotLabels(int rows, int cols, CurrentSlot currentSlot, Sheet sheet) {
         super(rows + 1, cols);
         labelList = new ArrayList<SlotLabel>(rows * cols);
+        this.currentSlot = currentSlot;
+        this.sheet = sheet;
+        
+        
         for (char ch = 'A'; ch < 'A' + cols; ch++) {
             add(new ColoredLabel(Character.toString(ch), Color.LIGHT_GRAY,
                     SwingConstants.CENTER));

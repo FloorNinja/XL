@@ -34,6 +34,6 @@ public class XLList extends Observable implements Iterable<XL> {
 
     public void setChanged() {
         super.setChanged();
-        notifyObservers();
+        //notifyObservers();
     }
 }

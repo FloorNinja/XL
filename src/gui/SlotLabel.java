@@ -17,7 +17,8 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
         super("                    ", Color.WHITE, RIGHT);
         this.address = address;
         this.currentSlot = currentSlot;
-        //sheet.addObserver(this);
+        this.sheet = sheet;
+        sheet.addObserver(this);
         addMouseListener(this);
     }
     
@@ -36,12 +37,15 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 		currentSlot.setWhite();
 		setBackground(Color.YELLOW);
 		currentSlot.set(this);
+		setText(sheet.slotStringValue(address));
 	}
     
     @Override
 	public void update(Observable o, Object arg) {
-    	setText(sheet.slotStringValue(address));
+    	currentSlot.deleteObserver(this);
+		setText(sheet.slotStringValue(address));
 	}
+    
     
     /* The following methods aren't defined for obvious reasons,
      * although this isn't advised there's nothing to do about it... */
