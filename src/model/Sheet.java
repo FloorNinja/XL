@@ -28,11 +28,10 @@ public class Sheet extends Observable implements Environment {
 	@Override
 	public double value(String address) {
 		Slot slot = sheet.get(address);
-		if (slot == null) {
-			throw new XLException("Slot with address: " + address + " is empty");
-			
+		if (slot != null) {
+			return slot.getValue(this);
 		}
-		return slot.getValue(this);
+		throw new XLException("Slot with address: " + address + " is empty");
 	}
 	
 	/**
@@ -42,10 +41,10 @@ public class Sheet extends Observable implements Environment {
 	 */
 	public String slotStringValue(String address){
 		Slot slot = sheet.get(address);
-		if(slot == null){
-			return "";
+		if(slot != null){
+			return slot.stringValue(this);
 		}
-		return slot.stringValue(this);
+		return "";
 	}
 	
 	/**
@@ -55,10 +54,10 @@ public class Sheet extends Observable implements Environment {
 	 */
 	public String slotExpression(String address){
 		Slot slot = sheet.get(address);
-		if(slot == null){
-			return "";
+		if(slot != null){
+			return slot.toString();
 		}
-		return slot.toString();
+		return "";
 	}
 	
 	/**

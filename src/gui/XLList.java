@@ -10,8 +10,7 @@ public class XLList extends Observable implements Iterable<XL> {
 
     public void add(XL xl) {
         list.add(xl);
-        setChanged();
-        notifyObservers();
+        this.setChanged();
     }
 
     public boolean isEmpty() {
@@ -28,12 +27,11 @@ public class XLList extends Observable implements Iterable<XL> {
 
     public void remove(XL xl) {
         list.remove(xl);
-        setChanged();
-        notifyObservers();
+        this.setChanged();
     }
 
     public void setChanged() {
         super.setChanged();
-        //notifyObservers();
+        notifyObservers();
     }
 }
