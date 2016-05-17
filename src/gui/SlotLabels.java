@@ -30,6 +30,7 @@ public class SlotLabels extends GridPanel {
             }
         }
         SlotLabel firstLabel = labelList.get(0);
+        currentSlot.set(firstLabel);
         firstLabel.setBackground(Color.YELLOW);
     }
 }

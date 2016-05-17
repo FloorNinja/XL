@@ -4,18 +4,28 @@ import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
 import gui.menu.XLMenuBar;
+import model.Sheet;
+import model.Slot;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
     private XLCounter counter;
     private StatusLabel statusLabel = new StatusLabel();
     private XLList xlList;
+    private Sheet sheet;
 
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
@@ -28,6 +38,7 @@ public class XL extends JFrame implements Printable {
         xlList.add(this);
         counter.increment();
         
+        sheet = new Sheet();
         CurrentSlot currentSlot = new CurrentSlot();
         JPanel statusPanel = new StatusPanel(statusLabel, currentSlot);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot);
@@ -36,7 +47,7 @@ public class XL extends JFrame implements Printable {
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, currentSlot, sheet));
         
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -57,6 +68,14 @@ public class XL extends JFrame implements Printable {
         setTitle(title);
         xlList.setChanged();
     }
+    
+    public void setData(HashMap<String, Slot> map) {
+		sheet.load(map);
+	}
+    
+    public Set<Entry<String, Slot>> getData() {
+		return sheet.getEntries();
+	}
 
     public static void main(String[] args) {
         new XL(new XLList(), new XLCounter());
