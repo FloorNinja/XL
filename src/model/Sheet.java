@@ -53,7 +53,7 @@ public class Sheet extends Observable implements Environment {
 	 * @param address
 	 * @return String
 	 */
-	public String slotExpression (String address){
+	public String slotExpression(String address){
 		Slot slot = sheet.get(address);
 		if(slot == null){
 			return "";
