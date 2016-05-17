@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import javax.swing.JTextField;
 
+<<<<<<< HEAD
 import util.XLException;
 import model.Sheet;
 
@@ -57,4 +58,55 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		}
 	}
 
+=======
+import model.Sheet;
+import util.XLException;
+
+
+public class Editor extends JTextField implements Observer, ActionListener {
+	private CurrentSlot currentSlot;
+	private Sheet sheet;
+	private StatusLabel status;
+
+	public Editor(CurrentSlot currentSlot, Sheet sheet, StatusLabel label) {
+		this.currentSlot = currentSlot;
+		this.sheet = sheet;
+		status = label;
+		setBackground(Color.WHITE);
+		addActionListener(this);
+		currentSlot.addObserver(this);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		String address = currentSlot.getAddress();
+		String representation = sheet.slotExpression(address);
+		setText(representation);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// Assuming user pressed Enter key
+		status.clear();
+		String name = currentSlot.getAddress();
+		String input = getText();
+		if (input.equals("")) {
+			
+			try {
+				sheet.removeSlot(name);
+			} catch (XLException e) {
+				status.setText(e.getMessage());
+			}
+			
+		} else {
+			
+			try {
+				sheet.putSlot(name, input);
+			} catch (XLException e) {
+				status.setText(e.getMessage());
+			}
+			
+		}
+	}
+>>>>>>> branch 'master' of https://github.com/FloorNinja/XL.git
 }

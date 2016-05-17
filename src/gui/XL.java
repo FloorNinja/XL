@@ -31,12 +31,13 @@ public class XL extends JFrame implements Printable {
 
     public XL(XLList xlList, XLCounter counter) {
         super("Untitled-" + counter);
-        sheet = new Sheet();
+        
         this.xlList = xlList;
         this.counter = counter;
         xlList.add(this);
         counter.increment();
         
+        sheet = new Sheet();
         CurrentSlot currentSlot = new CurrentSlot();
         JPanel statusPanel = new StatusPanel(statusLabel, currentSlot);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot, sheet);
@@ -68,15 +69,18 @@ public class XL extends JFrame implements Printable {
         xlList.notifyObservers();
     }
 
-    public static void main(String[] args) {
-        new XL(new XLList(), new XLCounter());
-    }
+    
+    public void setData(HashMap<String, Slot> map) {
+		sheet.load(map);
+	}
+    
     public Set<Entry<String, Slot>> getData() {
 		return sheet.getEntries();
 	}
 
-	public void setData(HashMap<String, Slot> map) {
-		sheet.load(map);
-	}
+    public static void main(String[] args) {
+        new XL(new XLList(), new XLCounter());
+    }
+
     
 }

@@ -26,7 +26,7 @@ public class SlotLabels extends GridPanel {
         for (int row = 1; row <= rows; row++) {
             for (char ch = 'A'; ch < 'A' + cols; ch++) {
             	
-            	//Get address for each column
+            	//Get address for each column.
             	StringBuilder sb = new StringBuilder();
             	sb.append(ch);
             	sb.append(row);
@@ -38,6 +38,7 @@ public class SlotLabels extends GridPanel {
             }
         }
         SlotLabel firstLabel = labelList.get(0);
+        //Set the firstLabel as the currentSlot here.
         currentSlot.set(firstLabel);
         firstLabel.setBackground(Color.YELLOW);
     }
