@@ -114,7 +114,6 @@ public class Sheet extends Observable implements Environment {
 			}
 		} catch (XLException e) {
 			sheet.put(address, tempSlot);
-			throw new XLException("The cell: " + address + " couldn't be removed because another cell depends on it!");
 		}
 		update();
 	}
@@ -132,7 +131,6 @@ public class Sheet extends Observable implements Environment {
 			}
 		} catch (XLException e) {
 			sheet = oldSheet;
-			throw new XLException("The file could not be loaded because of an error in the file!");
 		}
 		
 		update();
