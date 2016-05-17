@@ -43,7 +43,6 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
     	setText(sheet.slotStringValue(address));
 	}
     
-    
     /* The following methods aren't defined for obvious reasons,
      * although this isn't advised there's nothing to do about it... */
 	@Override

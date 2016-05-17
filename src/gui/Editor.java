@@ -29,8 +29,8 @@ public class Editor extends JTextField implements Observer, ActionListener {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		String address = currentSlot.getAddress();
-		String representation = sheet.slotExpression(address);
-		setText(representation);
+		String expression = sheet.slotExpression(address);
+		setText(expression);
 	}
 
 	@Override
