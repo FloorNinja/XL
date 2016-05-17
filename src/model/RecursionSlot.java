@@ -32,7 +32,7 @@ public class RecursionSlot implements Slot {
 	 * throws XLException because of the slots property as an error slot.
 	 */
 	@Override
-	public String toString(Environment e) {
+	public String toString() {
 		throw new XLException("Circular Error");
 	}
 

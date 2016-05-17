@@ -40,7 +40,7 @@ public class ExpressionSlot implements Slot {
      * @return the <code>String</code> representation of this expression.
      */
 	@Override
-	public String toString(Environment e) {
+	public String toString() {
 		return expr.toString();
 	}
 

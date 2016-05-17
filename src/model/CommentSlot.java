@@ -33,7 +33,7 @@ public class CommentSlot implements Slot {
      * @return the comment.
      */
 	@Override
-	public String toString(Environment e) {
+	public String toString() {
 		return comment;
 	}
 

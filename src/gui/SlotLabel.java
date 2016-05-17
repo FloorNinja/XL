@@ -6,14 +6,19 @@ import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import model.Sheet;
+
 public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 	private String address;
 	private CurrentSlot currentSlot;
+	private Sheet sheet;
 	
-    public SlotLabel(String address, CurrentSlot currentSlot) {
+    public SlotLabel(String address, CurrentSlot currentSlot, Sheet sheet) {
         super("                    ", Color.WHITE, RIGHT);
         this.address = address;
         this.currentSlot = currentSlot;
+        this.sheet = sheet;
+        sheet.addObserver(this);
         addMouseListener(this);
     }
     
@@ -32,11 +37,13 @@ public class SlotLabel extends ColoredLabel implements Observer, MouseListener {
 		currentSlot.setWhite();
 		setBackground(Color.YELLOW);
 		currentSlot.set(this);
+		setText(sheet.slotStringValue(address));
 	}
     
     @Override
 	public void update(Observable o, Object arg) {
-    	
+    	currentSlot.deleteObserver(this);
+		setText(sheet.slotStringValue(address));
 	}
     
     

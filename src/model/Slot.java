@@ -8,5 +8,5 @@ public interface Slot {
 	
 	public String stringValue(Environment e);
 	
-	public String toString(Environment e); 
+	public String toString(); 
 }

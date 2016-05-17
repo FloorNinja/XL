@@ -8,14 +8,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.Sheet;
+import model.Slot;
 
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
     private XLCounter counter;
     private StatusLabel statusLabel = new StatusLabel();
     private XLList xlList;
+    private Sheet sheet;
 
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
@@ -23,6 +31,7 @@ public class XL extends JFrame implements Printable {
 
     public XL(XLList xlList, XLCounter counter) {
         super("Untitled-" + counter);
+        sheet = new Sheet();
         this.xlList = xlList;
         this.counter = counter;
         xlList.add(this);
@@ -30,13 +39,13 @@ public class XL extends JFrame implements Printable {
         
         CurrentSlot currentSlot = new CurrentSlot();
         JPanel statusPanel = new StatusPanel(statusLabel, currentSlot);
-        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot);
-        Editor editor = new Editor();
+        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot, sheet);
+        Editor editor = new Editor(currentSlot, sheet, statusLabel);
         
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, currentSlot, sheet));
         
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,9 +65,18 @@ public class XL extends JFrame implements Printable {
     public void rename(String title) {
         setTitle(title);
         xlList.setChanged();
+        xlList.notifyObservers();
     }
 
     public static void main(String[] args) {
         new XL(new XLList(), new XLCounter());
     }
+    public Set<Entry<String, Slot>> getData() {
+		return sheet.getEntries();
+	}
+
+	public void setData(HashMap<String, Slot> map) {
+		sheet.load(map);
+	}
+    
 }
