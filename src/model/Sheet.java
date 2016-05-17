@@ -103,7 +103,19 @@ public class Sheet extends Observable implements Environment {
 	 * @param address
 	 */
 	public void removeSlot(String address) {
-		sheet.remove(address);
+		Slot tempSlot = sheet.get(address);
+		RecursionSlot recSlot = new RecursionSlot();
+		sheet.put(address, recSlot);
+		try {
+			for(Slot slot : sheet.values()) {
+				if(slot != recSlot) {
+					slot.getValue(this);
+				}
+			}
+		} catch (XLException e) {
+			sheet.put(address, tempSlot);
+			throw new XLException("The cell: " + address + " couldn't be removed because another cell depends on it!");
+		}
 		update();
 	}
 	
@@ -120,6 +132,7 @@ public class Sheet extends Observable implements Environment {
 			}
 		} catch (XLException e) {
 			sheet = oldSheet;
+			throw new XLException("The file could not be loaded because of an error in the file!");
 		}
 		
 		update();
