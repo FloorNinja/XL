@@ -5,21 +5,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map;
 
+import model.Slot;
+import model.SlotFactory;
 import util.XLException;
 
-//TODO move to another package
 public class XLBufferedReader extends BufferedReader {
-    public XLBufferedReader(String name) throws FileNotFoundException {
-        super(new FileReader(name));
+	private SlotFactory sf;
+	
+    public XLBufferedReader(String fileName) throws FileNotFoundException {
+        super(new FileReader(fileName));
+        sf = new SlotFactory();
     }
 
-    // TODO Change Object to something appropriate
-    public void load(Map<String, Object> map) {
+    public void load(Map<String, Slot> sheet) {
         try {
             while (ready()) {
-                String string = readLine();
-                int i = string.indexOf('=');
-                // TODO
+                String line = readLine();
+                String[] tokens = line.split("=");
+                String name = tokens[0];
+                String content = tokens[1];
+                sheet.put(name, sf.buildSlot(content));
             }
         } catch (Exception e) {
             throw new XLException(e.getMessage());
