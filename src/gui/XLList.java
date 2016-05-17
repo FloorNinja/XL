@@ -10,15 +10,15 @@ public class XLList extends Observable implements Iterable<XL> {
 
     public void add(XL xl) {
         list.add(xl);
-        setChanged();
-        notifyObservers();
+        this.setChanged();
     }
 
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
-    public Iterator<XL> iterator() {
+    @Override
+	public Iterator<XL> iterator() {
         return list.iterator();
     }
 
@@ -28,12 +28,12 @@ public class XLList extends Observable implements Iterable<XL> {
 
     public void remove(XL xl) {
         list.remove(xl);
-        setChanged();
-        notifyObservers();
+        this.setChanged();
     }
 
-    public void setChanged() {
+    @Override
+	public void setChanged() {
         super.setChanged();
-        //notifyObservers();
+        notifyObservers();
     }
 }

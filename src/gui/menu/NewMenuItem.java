@@ -1,9 +1,11 @@
 package gui.menu;
 
-import gui.XL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenuItem;
+
+import gui.XL;
 
 class NewMenuItem extends JMenuItem implements ActionListener {
     private XL xl;
@@ -14,7 +16,8 @@ class NewMenuItem extends JMenuItem implements ActionListener {
         addActionListener(this);
     }
 
-    public void actionPerformed(ActionEvent event) {
+    @Override
+	public void actionPerformed(ActionEvent event) {
         new XL(xl);
     }
 }

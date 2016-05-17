@@ -8,8 +8,8 @@ import java.util.Observer;
 
 import javax.swing.JTextField;
 
-import util.XLException;
 import model.Sheet;
+import util.XLException;
 
 public class Editor extends JTextField implements Observer, ActionListener {
 	private CurrentSlot currentSlot;
@@ -34,26 +34,21 @@ public class Editor extends JTextField implements Observer, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// Assuming user pressed Enter key
 		status.clear();
-		String name = currentSlot.getAddress();
+		String address = currentSlot.getAddress();
 		String input = getText();
 		if (input.equals("")) {
-			
 			try {
-				sheet.removeSlot(name);
+				sheet.removeSlot(address);
 			} catch (XLException e) {
 				status.setText(e.getMessage());
 			}
-			
 		} else {
-			
 			try {
-				sheet.putSlot(name, input);
+				sheet.putSlot(address, input);
 			} catch (XLException e) {
 				status.setText(e.getMessage());
 			}
-			
 		}
 	}
 }

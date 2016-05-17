@@ -1,12 +1,11 @@
 package gui.menu;
 
-import gui.CurrentSlot;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
+import gui.CurrentSlot;
 import model.Sheet;
 
 class ClearMenuItem extends JMenuItem implements ActionListener {
@@ -20,7 +19,8 @@ class ClearMenuItem extends JMenuItem implements ActionListener {
 		addActionListener(this);
 	}
 
-    public void actionPerformed(ActionEvent e) {
+    @Override
+	public void actionPerformed(ActionEvent e) {
         sheet.removeSlot(currentSlot.getAddress());
     }
 }

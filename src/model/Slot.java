@@ -8,5 +8,6 @@ public interface Slot {
 	
 	public String stringValue(Environment e);
 	
+	@Override
 	public String toString(); 
 }
