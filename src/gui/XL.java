@@ -3,7 +3,7 @@ package gui;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
-import gui.menu.XLMenuBar;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import gui.menu.XLMenuBar;
 import model.Sheet;
 import model.Slot;
 
@@ -54,7 +55,8 @@ public class XL extends JFrame implements Printable {
         setVisible(true);
     }
 
-    public int print(Graphics g, PageFormat pageFormat, int page) {
+    @Override
+	public int print(Graphics g, PageFormat pageFormat, int page) {
         if (page > 0)
             return NO_SUCH_PAGE;
         Graphics2D g2d = (Graphics2D) g;

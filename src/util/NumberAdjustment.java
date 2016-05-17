@@ -84,7 +84,8 @@ public class NumberAdjustment extends Adjustment {
      * @param number
      *            is the value to adjust.
      */
-    public String right(double number) {
+    @Override
+	public String right(double number) {
         StringBuilder builder = new StringBuilder();
         boolean negative = number < 0;
         if (negative) {
@@ -115,7 +116,8 @@ public class NumberAdjustment extends Adjustment {
      * @param number
      *            is the value to adjust.
      */
-    public String right(float number) {
+    @Override
+	public String right(float number) {
         return right((double) number);
     }
 

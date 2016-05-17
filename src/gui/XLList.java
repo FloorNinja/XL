@@ -17,7 +17,8 @@ public class XLList extends Observable implements Iterable<XL> {
         return list.isEmpty();
     }
 
-    public Iterator<XL> iterator() {
+    @Override
+	public Iterator<XL> iterator() {
         return list.iterator();
     }
 
@@ -30,7 +31,8 @@ public class XLList extends Observable implements Iterable<XL> {
         this.setChanged();
     }
 
-    public void setChanged() {
+    @Override
+	public void setChanged() {
         super.setChanged();
         notifyObservers();
     }

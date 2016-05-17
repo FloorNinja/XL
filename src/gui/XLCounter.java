@@ -7,7 +7,8 @@ public class XLCounter {
         counter++;
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return Integer.toString(counter);
     }
 }

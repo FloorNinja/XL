@@ -1,16 +1,15 @@
 package gui.menu;
 
-import gui.StatusLabel;
-import gui.XL;
-import io.XLBufferedReader;
-
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import javax.swing.JFileChooser;
 
-import util.XLException;
+import gui.StatusLabel;
+import gui.XL;
+import io.XLBufferedReader;
 import model.Slot;
+import util.XLException;
 
 class LoadMenuItem extends OpenMenuItem {
 
@@ -18,6 +17,7 @@ class LoadMenuItem extends OpenMenuItem {
 		super(xl, statusLabel, "Load");
 	}
 
+	@Override
 	protected void action(String path) throws FileNotFoundException {
 		try {
 			statusLabel.clear();
@@ -31,6 +31,7 @@ class LoadMenuItem extends OpenMenuItem {
 
 	}
 
+	@Override
 	protected int openDialog(JFileChooser fileChooser) {
 		return fileChooser.showOpenDialog(xl);
 	}

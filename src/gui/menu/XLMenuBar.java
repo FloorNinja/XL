@@ -1,13 +1,12 @@
 package gui.menu;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+
 import gui.CurrentSlot;
 import gui.StatusLabel;
 import gui.XL;
 import gui.XLList;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-
 import model.Sheet;
 
 public class XLMenuBar extends JMenuBar {
