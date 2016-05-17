@@ -111,8 +111,17 @@ public class Sheet extends Observable implements Environment {
 	 * Load a Sheet with new values from another HashMap.
 	 * @param sheet
 	 */
-	public void load(HashMap<String, Slot> sheet) {
-		this.sheet = sheet;
+	public void load(HashMap<String, Slot> newSheet) {
+		Map<String, Slot> oldSheet = sheet;
+		sheet = newSheet;
+		try {
+			for(Entry<String, Slot> e: sheet.entrySet()) {
+				checkRecursion(e.getKey(), e.getValue());
+			}
+		} catch (XLException e) {
+			sheet = oldSheet;
+		}
+		
 		update();
 	}
 	
