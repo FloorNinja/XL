@@ -27,13 +27,17 @@ public class XL extends JFrame implements Printable {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        JPanel statusPanel = new StatusPanel(statusLabel);
-        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS);
+        
+        CurrentSlot currentSlot = new CurrentSlot();
+        JPanel statusPanel = new StatusPanel(statusLabel, currentSlot);
+        JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot);
         Editor editor = new Editor();
+        
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
         setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
