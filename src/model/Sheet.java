@@ -14,11 +14,17 @@ public class Sheet extends Observable implements Environment {
 	private Map<String, Slot> sheet;
 	private SlotFactory slotFactory;
 	
+	/**
+	 * Constructor
+	 */
 	public Sheet() {
 		sheet = new HashMap<String, Slot>();
 		slotFactory = new SlotFactory();
 	}
 	
+	/**
+	 * Returns the value of the slot as type double. If the slot is null, throws XLException.
+	 */
 	@Override
 	public double value(String address) {
 		Slot slot = sheet.get(address);
@@ -29,22 +35,37 @@ public class Sheet extends Observable implements Environment {
 		return slot.getValue(this);
 	}
 	
-	public String slotStringValue(String name){
-		Slot slot = sheet.get(name);
+	/**
+	 * Returns the value of the slot as type double. If the slot is null, returns empty String as "";
+	 * @param address
+	 * @return String
+	 */
+	public String slotStringValue(String address){
+		Slot slot = sheet.get(address);
 		if(slot == null){
 			return "";
 		}
 		return slot.stringValue(this);
 	}
 	
-	public String slotExpression (String name){
-		Slot slot = sheet.get(name);
+	/**
+	 * Returns the expression of the slot as type double. If the slot is null, returns empty String as "".
+	 * @param address
+	 * @return String
+	 */
+	public String slotExpression (String address){
+		Slot slot = sheet.get(address);
 		if(slot == null){
 			return "";
 		}
 		return slot.toString();
 	}
 	
+	/**
+	 * Creates a slot with specified content in the specified address.
+	 * @param address the slots address in the sheet.
+	 * @param s the slots content.
+	 */
 	public void putSlot(String address, String s) {
 		Slot slot = slotFactory.buildSlot(s);
 		checkRecursion(address, slot);
@@ -52,6 +73,11 @@ public class Sheet extends Observable implements Environment {
 		update();
 	}
 	
+	/**
+	 * Check for circular dependency. If there is a circular dependency, change the slot to a RecursionSlot.
+	 * @param address the slots address in the sheet.
+	 * @param slot the created slot.
+	 */
 	private void checkRecursion(String address, Slot slot) {
 		Slot oldSlot = sheet.get(address);
 		RecursionSlot recursionSlot = new RecursionSlot();
@@ -63,29 +89,52 @@ public class Sheet extends Observable implements Environment {
 		}
 	}
 	
+	/**
+	 * Returns the slot with the specified address.
+	 * @param address
+	 * @return Slot
+	 */
 	public Slot getSlot(String address) {
 		return sheet.get(address);
 	}
 	
+	/**
+	 * Removes the slot with the specified address.
+	 * @param address
+	 */
 	public void removeSlot(String address) {
 		sheet.remove(address);
 		update();
 	}
 	
+	/**
+	 * Load a Sheet with new values from another HashMap.
+	 * @param sheet
+	 */
 	public void load(HashMap<String, Slot> sheet) {
 		this.sheet = sheet;
 		update();
 	}
 	
+	/**
+	 * Empties all the slots in the sheet.
+	 */
 	public void clearSheet() {
 		sheet.clear();
 		update();
 	}
 	
+	/**
+	 * Returns a set with all the entries in the sheet.
+	 * @return
+	 */
 	public Set<Entry<String, Slot>> getEntries() {
 		return sheet.entrySet();
 	}
 	
+	/**
+	 * Set that something has changed and notify all the observers.
+	 */
 	private void update() {
 		setChanged();
 		notifyObservers();
