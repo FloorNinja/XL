@@ -80,8 +80,7 @@ public class Sheet extends Observable implements Environment {
 	 */
 	private void checkRecursion(String address, Slot slot) {
 		Slot oldSlot = sheet.get(address);
-		RecursionSlot recursionSlot = new RecursionSlot();
-		sheet.put(address, recursionSlot);
+		sheet.put(address, new RecursionSlot());
 		try {
 			slot.getValue(this);
 		} finally {
