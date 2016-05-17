@@ -42,7 +42,7 @@ public class XL extends JFrame implements Printable {
         CurrentSlot currentSlot = new CurrentSlot();
         JPanel statusPanel = new StatusPanel(statusLabel, currentSlot);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, currentSlot);
-        Editor editor = new Editor();
+        Editor editor = new Editor(currentSlot, sheet, statusLabel);
         
         add(NORTH, statusPanel);
         add(CENTER, editor);
