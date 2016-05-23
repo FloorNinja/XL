@@ -110,6 +110,7 @@ public class Sheet extends Observable implements Environment {
 					slot.getValue(this);
 				}
 			}
+			sheet.remove(address);
 		} catch (XLException e) {
 			sheet.put(address, tempSlot);
 		}

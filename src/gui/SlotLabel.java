@@ -38,8 +38,7 @@ public class SlotLabel extends ColoredLabel {
 		}
     	
     	@Override
-    	public void mousePressed(MouseEvent e) {//TODO: Remove reset(); later...?
-    		currentSlot.reset();
+    	public void mousePressed(MouseEvent e) {
     		currentSlot.set(slot);
     	}
     }

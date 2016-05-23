@@ -11,7 +11,9 @@ public class CurrentSlot extends Observable {
 	 * Sets the currently selected slot, and notifies the observing classes.
 	 * @param currentSlot
 	 */
-	public void set(SlotLabel currentSlot) { //TODO: if(currentSlot != null) reset();
+	public void set(SlotLabel currentSlot) {
+		if(this.currentSlot != null)
+			reset();
 		this.currentSlot = currentSlot;
 		currentSlot.setBackground(Color.YELLOW);
 		setChanged();
@@ -29,7 +31,7 @@ public class CurrentSlot extends Observable {
 	/**
 	 * Set the background to white again.
 	 */
-	public void reset() {
+	private void reset() {
 		currentSlot.setBackground(Color.WHITE);
 	}
 }
