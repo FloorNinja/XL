@@ -37,18 +37,15 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		status.clear();
 		String address = currentSlot.getAddress();
 		String input = getText();
-		if (input.equals("")) {
-			try {
-				sheet.removeSlot(address);
-			} catch (XLException e) {
-				status.setText(e.getMessage());
-			}
-		} else {
-			try {
+		try {
+			if (input.equals("")) 
+				sheet.removeSlot(address); 
+			else
 				sheet.putSlot(address, input);
-			} catch (XLException e) {
-				status.setText(e.getMessage());
-			}
+			
+		} catch (XLException e) {
+			status.setText(e.getMessage());
 		}
+		
 	}
 }

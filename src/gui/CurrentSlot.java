@@ -11,11 +11,11 @@ public class CurrentSlot extends Observable {
 	 * Sets the currently selected slot, and notifies the observing classes.
 	 * @param currentSlot
 	 */
-	public void set(SlotLabel currentSlot) {
+	public void set(SlotLabel currentSlot) { //TODO: if(currentSlot != null) reset();
 		this.currentSlot = currentSlot;
+		currentSlot.setBackground(Color.YELLOW);
 		setChanged();
 		notifyObservers();
-		addObserver(currentSlot);
 	}
 
 	/**
@@ -25,11 +25,19 @@ public class CurrentSlot extends Observable {
 	public String getAddress() {
 		return currentSlot.getAddress();
 	}
+	
+	/**
+	 * Sets the text for the current label
+	 * @param text
+	 */
+	public void setText(String text) { //TODO: Denna kommer antagligen försvinna
+		currentSlot.setText(text);
+	}
 
 	/**
 	 * Set the background to white again.
 	 */
-	public void setWhite() {
+	public void reset() {
 		currentSlot.setBackground(Color.WHITE);
 	}
 }
